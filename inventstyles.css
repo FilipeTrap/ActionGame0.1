@@ -1,0 +1,612 @@
+#teladetitulopng {
+	position: absolute; 	
+		left: 3px; 
+		top: 3px; 
+        Background-size:100%; 
+        background-attachment: fixed; /* imagem fixa pra ela não rolar quando vc rolar a pagina*/
+        background-repeat: no-repeat; /* imagen não vai se repetir quando pros lados  */
+        background-position: center; /* imagem fixa no centro */
+        width: 768px; height: 1280px; 
+        z-index: 10;
+    } 
+
+#teladetitulogif {
+  position: absolute; 	
+    left: 3px; 
+    top: 3px; 
+    Background-size:100%; 
+    background-attachment: fixed; /* imagem fixa pra ela não rolar quando vc rolar a pagina*/
+    background-repeat: no-repeat; /* imagen não vai se repetir quando pros lados  */
+    background-position: center; /* imagem fixa no centro */
+    width: 768px; height: 1280px; 
+    z-index: 10;
+  } 
+
+
+  #botaostart {
+    position: absolute; 
+    left: 150px; 
+    top: 645px; 
+    background-color: Transparent;
+    width: 140px; height: 130px; 
+    border-color: Transparent; 
+    z-index: 10;
+    }
+
+
+  #teste1 {
+    position: absolute; 
+    left: 1243px; 
+    top: 582px; 
+      width: 120px; height: 40px; text-align: center; font-size: 24px;
+    }
+    
+  #teste2 {
+    position: absolute; 
+    left: 1243px; 
+    top: 620px; 
+    width: 120px; height: 40px; text-align: center; font-size: 24px;
+    }
+    
+  #teste3 {
+    position: absolute; 
+    left: 1243px; 
+    top: 658px; 
+    width: 120px; height: 40px; text-align: center; font-size: 24px;
+    }
+    
+  #teste4 {
+    position: absolute; 
+    left: 1243px; 
+    top: 694px; 
+    width: 120px; height: 40px; text-align: center; font-size: 24px;
+    }
+    
+  #teste5 {
+    position: absolute; 
+    left: 1243px; 
+    top: 732px; 
+    width: 120px; height: 40px; text-align: center; font-size: 24px;
+    }
+
+
+
+.slotElmo1 {
+  position: absolute; 
+ top: 408px; 
+ left: 265px; 
+ width: 56px;
+ height: 56px;
+ opacity : 0.5;
+ z-index: 2;
+}
+
+
+.slotArma1 {
+  position: absolute; 
+ top: 409px; 
+ left: 331px; 
+ width: 56px;
+ height: 56px;
+ opacity : 0.5;
+ z-index: 2;
+}
+
+
+
+.slotOffhand1 {
+  position: absolute; 
+ top: 472px; 
+ left: 208px; 
+ width: 56px;
+ height: 56px;
+ opacity : 0.5;
+ z-index: 2;
+}
+
+
+.slotArmadura1 {
+  position: absolute; 
+ top: 472px; 
+ left: 267px; 
+ width: 56px;
+ height: 56px;
+ opacity : 0.5;
+ z-index: 2;
+}
+
+
+
+
+/* ---------------------------------------------------------------------- */
+
+
+
+
+#nadaElmo1 {
+  position: absolute; 
+  top: 408px; 
+  left: 265px; 
+ width: 56px;
+ height: 56px;
+
+ z-index: 3;
+}
+
+
+
+#nadaArma1 {
+  position: absolute; 
+  top: 409px; 
+  left: 331px; 
+ width: 56px;
+ height: 56px;
+
+ z-index: 3;
+}
+
+
+
+#nadaOffhand1 {
+  position: absolute; 
+  top: 472px; 
+  left: 208px; 
+ width: 56px;
+ height: 56px;
+
+ z-index: 3;
+}
+
+
+
+#nadaArmadura1 {
+  position: absolute; 
+  top: 472px; 
+  left: 267px; 
+ width: 56px;
+ height: 56px;
+
+ z-index: 3;
+}
+
+
+
+.item:hover .info {
+  display: block;
+}
+
+.info {
+  display: none;
+  position: absolute;
+  background-color: white;
+  padding: 15px;
+  border: 1px solid black;
+}
+  
+
+
+
+
+.invertida {
+  transform: scaleX(-1);
+}
+.desinvertida {
+  transform: scaleX(+1);
+}
+
+
+
+
+
+#premove {
+position: absolute; 
+left: 1043px; 
+top: 1120px; 
+  width: 140px; height: 130px; text-align: center; font-size: 24px;
+}
+  #checar {
+position: absolute; 
+left: 1243px; 
+top: 1120px; 
+  width: 140px; height: 130px; text-align: center; font-size: 24px;
+}
+
+#player1 {
+position: absolute; 
+left: 50px; 
+top: 484px; 
+  transition: left 0.5s ease-in-out, top 0.5s ease-in-out;
+  -webkit-transform: scaleX(-1);/* inversão do personagem da direita*/
+  transform: scaleX(-1);/* inversão do personagem da direita*/
+width: 150px; height: 150px;
+  z-index: 2;
+}
+  #imgplayer1 {
+
+width: 150px; height: 150px;
+ 
+}
+
+#vidaplayer1show {
+position: absolute; 
+  left: 23px; 
+top: 0px; 
+  font-family: 'VT323', monospace;
+font-size: 24px;
+color: #fefefe;
+text-shadow: #333 1px 2px 1px;
+  -webkit-transform: scaleX(-1);/* inversão do personagem da direita*/
+  transform: scaleX(-1);/* inversão do personagem da direita*/
+
+}
+ 
+  #player2 {
+position: absolute; 
+left: 589px; 
+top: 484px; 
+  transition: left 0.5s ease-in-out, top 0.5s ease-in-out;
+width: 150px; height: 150px;
+  z-index: 2;
+}
+  #imgplayer2 {
+
+width: 150px; height: 150px;
+
+}
+
+#vidaplayer2show {
+position: absolute; 
+  left: 23px; 
+top: 0px; 
+  font-family: 'VT323', monospace;
+font-size: 24px;
+color: #fefefe;
+text-shadow: #333 1px 2px 1px;
+
+}
+#andar {
+position: absolute; 
+left: 230px; 
+top: 1120px; 
+  width: 140px; height: 130px; text-align: center; font-size: 24px;
+}
+#atacar {
+position: absolute; 
+left: 43px; 
+top: 1120px; 
+  width: 140px; height: 130px; text-align: center; font-size: 24px;
+}
+
+
+#attack {
+  left: 0px; 
+top: 0px; 
+  position: absolute; 
+  width: 131px; height: 119px;
+  }
+
+
+#inventario {
+position: absolute; 
+left: 421px; 
+top: 1120px; 
+  width: 140px; height: 130px; text-align: center; font-size: 24px;
+}
+#endturn {
+  position: absolute; 
+  left: 609px; 
+  top: 1120px; 
+    width: 140px; height: 130px; text-align: center; font-size: 24px;
+  }
+  #endtur {
+    left: 0px; 
+    top: 0px; 
+      position: absolute; 
+      width: 131px; height: 119px;
+    }
+  
+
+  #invent {
+  left: 0px; 
+top: 0px; 
+  position: absolute; 
+  width: 131px; height: 119px;
+  }
+  #boot {
+  left: 0px; 
+top: 0px; 
+  position: absolute; 
+  width: 131px; height: 119px;
+  }
+
+
+.slotSpacearmoplayer1 {
+	position: absolute;
+  margin: 10px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 109px;
+  height: 30px;
+  top: 865px; 
+  left: 871px; 
+  
+
+}
+
+
+
+#equipamentos {
+  position: absolute; 
+ top: 383px; 
+ left: 206px; 
+ width: 189px;
+ height: 217px;
+  background: url("assets/equipamentos.png") no-repeat center center;
+ background-size: cover;
+ 
+}
+B1 {
+  margin: 5px 10px;
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+  color: #404040;
+  position: absolute;
+  top: 41px; 
+  left: -15px; 
+}
+
+B2 {
+  margin: 5px 10px;
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+  color: #404040;
+  position: absolute;
+  top: 41px; 
+  left: -15px; 
+}
+B3 {
+  margin: 5px 10px;
+  font-family: 'VT323', monospace;
+  font-size: 16px;
+  color: #404040;
+  position: absolute;
+  top: 41px; 
+  left: -15px; 
+}
+
+.slotAlma1 {
+	position: absolute;
+  margin: 10px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 109px;
+  height: 30px;
+  top: 700px; 
+  left: 71px; 
+
+}
+
+
+.slotAlma2 {
+	position: absolute;
+  margin: 10px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 109px;
+  height: 30px;
+  top: 700px; 
+  left: 328px; 
+
+
+}
+.slotAlma3 {
+	position: absolute;
+  margin: 10px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 109px;
+  height: 30px;
+  top: 700px; 
+  left: 586px; 
+
+
+}
+
+#voltar {
+  position: absolute; 
+  top: 430px; 
+  left: 20px; 
+   width: 50px;
+  height: 50px;
+}
+
+
+#excluir {
+  position: absolute; 
+  top: 1125px; 
+  left: 502px; 
+  width: 120px;
+  height: 120px;
+}
+
+#lixo {
+   position: absolute; 
+  top: 1143px; 
+  left: 645px; 
+  width: 81px;
+  height: 81px;
+   background: url("itens/lixeira.png") no-repeat center center;
+  background-size: cover;
+}
+
+
+
+
+
+body {
+  background: #ccc;
+  box-sizing: border-box;
+  width: 100%;
+  height: 80vh;
+}
+
+.content {
+  position: absolute; 
+		left: 2px; 
+		top: 2px; 
+    width: 245px;
+    height: 900px;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  flex-direction: column;
+  z-index: 6;
+}
+
+.inventory {
+	position: absolute;
+  width: 595px;
+  height: 596px;
+  left: 8px; 
+	top: 5px; 
+  background: #c6c6c6;
+  border-radius: 3px;
+  box-shadow: 5px 5px 0px #555555, inset 4px 4px 0px #fefefe;
+  padding-top: 5px;
+  padding-left: 5px;
+  margin-bottom: 10px;
+}
+.inventory2 {
+	position: absolute;
+  width: 761px;
+  height: 468px;
+  left: 802px; 
+		top: 802px; 
+  background: #c6c6c6;
+  border-radius: 3px;
+  box-shadow: 5px 5px 0px #555555, inset 4px 4px 0px #fefefe;
+  padding-top: 5px;
+  padding-left: 5px;
+  margin-bottom: 10px;
+}
+h1 {
+  margin: 5px 10px;
+  font-family: 'VT323', monospace;
+  font-size: 24px;
+  color: #404040;
+}
+
+.number {
+  font-family: 'VT323', monospace;
+  font-size: 24px;
+  color: #fefefe;
+  position: relative;
+  text-shadow: #333 1px 2px 1px;
+  top: -16px;
+  right: -8px;
+  cursor: default;
+}
+
+.slot {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  justify-content: center;
+  background: #8b8b8b;
+  box-shadow: inset 1.5px 1.5px 0px rgba(55, 55, 55, 0.8),
+    inset -2px -2px 0px #ffffff;
+	
+}
+
+.slotSpace {
+  margin: 10px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+
+.invisible {
+  visibility: hidden;
+}
+
+.item {
+  margin: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  
+}
+
+.item img {
+  width: 56px;
+}
+
+.ghostItem img {
+  width: 56px;
+}
+.ghostItem .number {
+  top: -20px;
+  right: -13px;
+  
+}
+
+::selection {
+  background: transparent;
+}
+
+::-moz-selection {
+  background: transparent;
+}
+
+.copy {
+  font-family: 'VT323', monospace;
+  font-size: 18px;
+  width: 350px;
+  display: flex;
+  justify-content: flex-end;
+  color: #333;
+  
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+
+
+
+#base0 {
+position: absolute; 	
+left: 3px; 
+top: 3px; 
+      Background-size:100%; 
+      background-attachment: fixed; /* imagem fixa pra ela não rolar quando vc rolar a pagina*/
+      background-repeat: no-repeat; /* imagen não vai se repetir quando pros lados  */
+      background-position: center; /* imagem fixa no centro */
+      width: 768px; height: 1280px; 
+  } 
+  #base4 {
+position: absolute; 	
+left: 3px; 
+top: 3px; 
+      Background-size:100%; 
+      background-attachment: fixed; /* imagem fixa pra ela não rolar quando vc rolar a pagina*/
+      background-repeat: no-repeat; /* imagen não vai se repetir quando pros lados  */
+      background-position: center; /* imagem fixa no centro */
+      width: 768px; height: 1280px; 
+  }    
+  #arena {
+position: absolute; 	
+left: 3px; 
+top: 3px; 
+      Background-size:100%; 
+      background-attachment: fixed; /* imagem fixa pra ela não rolar quando vc rolar a pagina*/
+      background-repeat: no-repeat; /* imagen não vai se repetir quando pros lados  */
+      background-position: center; /* imagem fixa no centro */
+      width: 768px; height: 1280px; 
+      z-index: -1;
+  } 

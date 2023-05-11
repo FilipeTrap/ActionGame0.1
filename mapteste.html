@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Quadriculado</title>
+    <link rel="stylesheet" href="inventstyles.css" />
+	<script src="inventscript.js" defer></script>
+</head>
+
+    <style>
+
+        
+.invertida {
+    transform: scaleX(-1);
+}
+.desinvertida {
+    transform: scaleX(+1);
+}
+#player1 {
+	position: absolute;  
+	left: 98px; 
+	top: 98px; 
+     /* transition: left 0.5s ease-in-out, top 0.5s ease-in-out;  */
+    -webkit-transform: scaleX(-1);/* inversão do personagem da direita*/
+    transform: scaleX(-1);/* inversão do personagem da direita*/
+	width: 60px; height: 60px;
+     z-index: 0; 
+	}
+    /*     #imgplayer1 {
+    position: absolute; 
+    left: 21px; 
+	top: -20px; 
+    background-image: url(sprites/TV_Body_p01.png);
+    background-position: 100px -3px; 
+	width: 47px; height: 50px;
+    background-size: 325%;
+	} 
+    
+     #armaduraplayer1 {
+    position: absolute; 
+    left: 21px; 
+	top: -20px; 
+    background-image: url(sprites/Armadura1.png);
+    background-position: 100px -3px; 
+	width: 47px; height: 50px;
+    background-size: 325%;
+	}
+    #helmoplayer1 {
+    position: absolute; 
+    left: 21px; 
+	top: -20px; 
+    background-image: url(sprites/Helmet1.png);
+    background-position: 100px -3px; 
+	width: 47px; height: 50px;
+    background-size: 325%;
+	}
+    */
+    #imgplayer1 {
+    position: absolute; 
+    left: 23px; 
+	top: -25px; 
+    background-image: url(sprites/TV_Body_p01.png);
+    background-position: 95px 0px; 
+	width: 47px; height: 48px;
+    background-size: 305%;
+	}
+    #armaduraplayer1 {
+    position: absolute; 
+    left: 23px; 
+	top: -25px; 
+    background-image: url(sprites/Armadura0.png);
+    background-position: 95px 0px; 
+	width: 47px; height: 48px;
+    background-size: 305%;
+	}
+    #helmoplayer1 {
+    position: absolute; 
+    left: 23px; 
+	top: -25px; 
+    background-image: url(sprites/Helmet0.png);
+    background-position: 95px 0px; 
+	width: 47px; height: 48px;
+    background-size: 305%;
+	}
+    #attackfrente{
+    position: absolute; 
+    left: -21px; 
+	top: -29px; 
+	width: 100px; height: 100px;
+   
+	}
+    #passararmadura{
+        position: absolute; 
+    left:716px; 
+	top: 10px; 
+	width: 50px; height: 50px;
+   
+	}
+    #voltararmadura{
+    position: absolute; 
+    left: 611px; 
+	top: 10px; 
+	width: 50px; height: 50px;
+   
+	}
+
+    #passararhelmo{
+        position: absolute; 
+    left:716px; 
+	top: 63px; 
+	width: 50px; height: 50px;
+   
+	}
+    #voltararhelmo{
+    position: absolute; 
+    left: 611px; 
+	top: 63px; 
+	width: 50px; height: 50px;
+   
+	}
+    #inventario{
+    position: absolute; 
+    left: 611px; 
+	top: 120px; 
+	width: 50px; height: 50px;
+   
+	}
+/* #vidaplayer1show {
+	position: absolute; 
+    left: 0px; 
+	top: 0px; 
+    font-family: 'VT323', monospace;
+  font-size: 24px;
+  color: #fefefe;
+  text-shadow: #333 1px 2px 1px;
+    -webkit-transform: scaleX(-1); inversão do personagem da direita
+    transform: scaleX(-1); inversão do personagem da direita
+
+	} */
+        .botaogrind{
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+            border-color: transparent;
+        }
+        .my-div{
+            top: 0;
+            left: 0;
+        }
+        .container {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            background-image: url("maps/mapteste600.png");
+            /* background-image: url("maps/mapcasa1interior.png"); */
+            /* background-image: url("maps/mapcasa2interior.png"); */
+        }
+        #transicaogif{
+            position: absolute;
+            width: 609px;
+            height: 609px;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            /* background-image: url("maps/mapcasa1interior.png"); */
+        }
+        
+        .grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            box-sizing: border-box;
+            
+        }
+        
+        .grid div {
+            width: calc(100% / 20);
+            height: calc(100% / 20);
+             border: 1px solid black; 
+            box-sizing: border-box;
+        }
+    </style>
+
+<body>
+
+
+     <div class="container">
+        <div class="grid"style="visibility:hidden">
+            <div class="my-div" onclick="getDivCoordinates(this,0)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,1)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,2)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,3)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,4)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,5)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,6)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,7)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,8)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,9)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,10)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,11)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,12)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,13)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,14)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,15)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,16)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,17)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,18)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,19)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,20)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,21)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,22)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,23)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,24)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,25)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,26)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,27)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,28)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,29)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,30)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,31)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,32)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,33)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,34)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,35)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,36)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,37)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,38)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,39)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,40)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,41)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,42)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,43)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,44)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,45)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,46)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,47)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,48)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,49)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,50)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,51)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,52)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,53)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,54)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,55)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,56)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,57)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,58)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,59)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,60)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,61)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,62)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,63)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,64)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,65)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,66)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,67)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,68)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,69)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,70)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,71)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,72)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,73)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,74)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,75)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,76)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,77)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,78)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,79)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,80)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,81)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,82)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,83)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,84)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,85)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,86)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,87)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,88)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,89)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,90)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,91)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,92)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,93)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,94)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,95)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,96)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,97)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,98)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,99)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,100)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,101)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,102)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,103)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,104)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,105)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,106)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,107)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,108)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,109)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,110)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,111)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,112)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,113)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,114)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,115)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,116)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,117)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,118)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,119)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,120)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,121)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,122)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,123)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,124)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,125)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,126)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,127)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,128)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,129)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,130)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,131)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,132)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,133)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,134)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,135)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,136)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,137)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,138)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,139)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,140)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,141)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,142)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,143)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,144)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,145)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,146)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,147)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,148)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,149)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,150)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,151)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,152)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,153)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,154)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,155)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,156)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,157)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,158)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,159)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,160)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,161)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,162)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,163)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,164)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,165)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,166)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,167)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,168)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,169)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,170)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,171)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,172)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,173)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,174)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,175)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,176)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,177)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,178)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,179)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,180)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,181)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,182)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,183)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,184)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,185)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,186)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,187)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,188)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,189)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,190)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,191)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,192)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,193)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,194)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,195)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,196)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,197)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,198)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,199)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,200)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,201)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,202)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,203)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,204)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,205)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,206)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,207)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,208)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,209)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,210)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,211)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,212)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,213)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,214)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,215)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,216)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,217)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,218)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,219)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,220)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,221)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,222)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,223)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,224)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,225)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,226)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,227)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,228)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,229)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,230)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,231)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,232)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,233)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,234)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,235)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,236)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,237)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,238)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,239)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,240)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,241)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,242)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,243)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,244)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,245)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,246)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,247)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,248)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,249)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,250)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,251)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,252)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,253)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,254)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,255)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,256)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,257)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,258)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,259)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,260)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,261)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,262)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,263)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,264)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,265)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,266)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,267)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,268)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,269)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,270)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,271)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,272)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,273)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,274)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,275)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,276)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,277)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,278)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,279)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,280)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,281)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,282)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,283)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,284)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,285)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,286)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,287)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,288)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,289)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,290)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,291)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,292)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,293)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,294)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,295)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,296)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,297)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,298)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,299)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,300)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,301)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,302)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,303)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,304)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,305)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,306)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,307)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,308)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,309)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,310)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,311)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,312)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,313)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,314)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,315)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,316)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,317)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,318)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,319)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,320)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,321)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,322)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,323)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,324)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,325)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,326)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,327)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,328)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,329)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,330)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,331)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,332)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,333)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,334)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,335)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,336)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,337)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,338)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,339)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,340)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,341)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,342)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,343)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,344)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,345)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,346)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,347)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,348)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,349)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,350)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,351)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,352)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,353)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,354)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,355)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,356)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,357)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,358)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,359)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,360)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,361)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,362)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,363)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,364)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,365)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,366)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,367)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,368)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,369)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,370)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,371)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,372)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,373)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,374)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,375)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,376)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,377)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,378)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,379)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,380)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,381)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,382)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,383)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,384)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,385)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,386)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,387)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,388)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,389)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,390)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,391)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,392)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,393)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,394)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,395)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,396)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,397)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,398)"><button class="botaogrind"></button></div>
+            <div class="my-div" onclick="getDivCoordinates(this,399)"><button class="botaogrind"></button></div>
+        </div>
+    </div> 
+<button id="passararmadura" onclick="passararmadura()"> > </button>
+<button id="voltararmadura" onclick="voltararmadura()"> < </button>
+<button id="passararhelmo" onclick="passarhelmo()"> > </button>
+<button id="voltararhelmo" onclick="voltarhelmo()"> < </button>
+<button id="inventario" onclick="inventario()"> inventário </button>
+<button id="additens" onclick="additens()"> add </button>
+    <div id="player1">
+        <div   id="imgplayer1"   > </div>
+        <div   id="armaduraplayer1"  > </div>
+        <div   id="helmoplayer1"   > </div>
+        <img src="assets/attack.gif" id="attackfrente" style="visibility:hidden">
+        </div>
+<img src="maps/trasicao.gif" id="transicaogif" style="visibility:hidden">
+
+
+<div class="content" style="visibility:hidden"> </div>
+<div class="inventory"style="visibility:hidden">
+    <h1>Inventário</h1>
+
+
+
+
+
+    <div class="slotSpace">
+      <div id="0" class="slot"></div>
+      <div id="1" class="slot"></div>
+      <div id="2" class="slot"></div>
+      <div id="3" class="slot"></div>
+      <div id="4" class="slot"></div>
+      <div id="5" class="slot"></div>
+      <div id="6" class="slot"></div>
+      <div id="7" class="slot"></div>
+      <div id="8" class="slot"></div>
+      <div id="9" class="slot"></div>
+      <div id="10" class="slot"></div>
+      <div id="11" class="slot"></div>
+      <div id="12" class="slot"></div>
+      <div id="13" class="slot"></div>
+      <div id="14" class="slot">
+      <!--  <div class="item" id="cobblestone">
+          <img src="itens/cobblestone.png" />
+          <div class="number">
+            3
+          </div>
+        </div>-->
+      </div>
+      <div id="15" class="slot"></div>
+      <div id="16" class="slot"></div>
+      <div id="17" class="slot"></div>
+      <div id="18" class="slot"></div>
+      <div id="19" class="slot"></div>
+      <div id="20" class="slot">
+       <!-- <div class="item" id="cobblestone">
+          <img src="itens/cobblestone.png" />
+          <div class="number">
+            14
+          </div>
+        </div>-->
+      </div>
+      <div id="21" class="slot"></div>
+      <div id="22" class="slot"></div>
+      <div id="23" class="slot"></div>
+      <div id="24" class="slot"></div>
+      
+      <div id="25" class="slot"></div>
+      <div id="26" class="slot"></div>
+      <div id="27" class="slot"></div>
+      <div id="28" class="slot"></div>
+      <div id="29" class="slot"></div>
+      <div id="30" class="slot"></div>
+      <div id="31" class="slot"></div>
+      <div id="32" class="slot"></div>
+      <div id="33" class="slot"></div>
+      <div id="34" class="slot"></div>
+      <div id="35" class="slot"></div>
+
+      <div id="36" class="slot"></div>
+      <div id="37" class="slot"></div>
+      <div id="38" class="slot"></div>
+      <div id="39" class="slot"></div>
+      <div id="40" class="slot"></div>
+      <div id="41" class="slot"></div>
+      <div id="42" class="slot"></div>
+      <div id="43" class="slot"></div>
+      <div id="44" class="slot"></div>
+      <div id="45" class="slot"></div>
+      <div id="46" class="slot"></div>
+      <div id="47" class="slot"></div>
+      <div id="48" class="slot"></div>
+      <div id="49" class="slot"></div>
+      <div id="50" class="slot"></div>
+      <div id="51" class="slot"></div>
+      <div id="52" class="slot"></div>
+      <div id="53" class="slot"></div>
+      <div id="54" class="slot"></div>
+      <div id="55" class="slot"></div>
+      <div id="56" class="slot"></div>
+      <div id="57" class="slot"></div>
+      <div id="58" class="slot"></div>
+      <div id="59" class="slot"></div>
+  
+
+      <div id="equipamentos"></div>
+
+
+
+      <img src="itens/tudo.png" id="nadaElmo1"/>
+
+
+      <img src="itens/tudo.png" id="nadaArma1"/>
+
+      <img src="itens/tudo.png" id="nadaOffhand1"/>
+ 
+      <img src="itens/tudo.png" id="nadaArmadura1"/>
+     
+
+
+
+<div class="slotElmo1">
+          <div id="103" class="slot"></div>
+           
+          </div>
+  
+
+
+
+<div class="slotArma1">
+              <div id="106" class="slot"></div>
+               
+              </div>
+          
+
+
+<div class="slotOffhand1">
+          <div id="109" class="slot"></div>
+           
+          </div>
+  
+
+
+            <div class="slotArmadura1">
+              <div id="112" class="slot"></div>
+               
+              </div>
+      
+    
+
+
+          
+
+    </div>
+    
+ <button id="excluir" onclick="removerItem()">excluir</button>
+
+<div id="lixo" class="slot lixo"></div>
+ <button id="voltar" onclick="voltar()">Voltar</button>
+
+ 
+
+
+
+<!-- <button id="botao" onclick="botao()">botão</button> -->
+
+
+</div>
+
+
+
+</body>
+<script>
+
+const helmo = document.getElementById('helmoplayer1');
+let numImagemhelmo = 0;
+
+function atualizarelmo(){
+    helmo.style.backgroundImage = `url(sprites/Helmet${numImagemhelmo}.png)`;
+}
+
+function passarhelmo() {
+  numImagemhelmo++;
+  if(numImagemhelmo > 27){
+    numImagemhelmo = 0
+  }
+  helmo.style.backgroundImage = `url(sprites/Helmet${numImagemhelmo}.png)`;
+}
+
+function voltarhelmo() {
+  numImagemhelmo--;
+  if(numImagemhelmo < 0){
+    numImagemhelmo = 27
+  }
+  helmo.style.backgroundImage = `url(sprites/Helmet${numImagemhelmo}.png)`;
+}
+
+const armadura = document.getElementById('armaduraplayer1');
+let numImagemarmadura = 0;
+
+
+function atualizararmadura(){
+    armadura.style.backgroundImage = `url(sprites/Armadura${numImagemarmadura}.png)`;
+}
+
+function passararmadura() {
+    numImagemarmadura++;
+  if(numImagemarmadura > 33){
+    numImagemarmadura = 0
+  }
+  armadura.style.backgroundImage = `url(sprites/Armadura${numImagemarmadura}.png)`;
+}
+
+
+
+function voltararmadura() {
+    numImagemarmadura--;
+  if(numImagemarmadura < 0){
+    numImagemarmadura = 33
+  }
+  armadura.style.backgroundImage = `url(sprites/Armadura${numImagemarmadura}.png)`;
+}
+
+
+     const cordenadasTop =[
+8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
+38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,38,
+68,68,68,68,68,68,68,68,68,68,68,68,68,68,68,68,68,68,68,68,
+98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,98,
+128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,128,
+158,158,158,158,158,158,158,158,158,158,158,158,158,158,158,158,158,158,158,158,
+188,188,188,188,188,188,188,188,188,188,188,188,188,188,188,188,188,188,188,188,
+218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,218,
+248,248,248,248,248,248,248,248,248,248,248,248,248,248,248,248,248,248,248,248,
+278,278,278,278,278,278,278,278,278,278,278,278,278,278,278,278,278,278,278,278,
+308,308,308,308,308,308,308,308,308,308,308,308,308,308,308,308,308,308,308,308,
+338,338,338,338,338,338,338,338,338,338,338,338,338,338,338,338,338,338,338,338,
+368,368,368,368,368,368,368,368,368,368,368,368,368,368,368,368,368,368,368,368,
+398,398,398,398,398,398,398,398,398,398,398,398,398,398,398,398,398,398,398,398,
+428,428,428,428,428,428,428,428,428,428,428,428,428,428,428,428,428,428,428,428,
+458,458,458,458,458,458,458,458,458,458,458,458,458,458,458,458,458,458,458,458,
+488,488,488,488,488,488,488,488,488,488,488,488,488,488,488,488,488,488,488,488,
+518,518,518,518,518,518,518,518,518,518,518,518,518,518,518,518,518,518,518,518,
+548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,
+578,578,578,578,578,578,578,578,578,578,578,578,578,578,578,578,578,578,578,578]
+
+ const cordenadasLeft =[
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578,
+ 8,38,68,98,128,158,188,218,248,278,308,338,368,398,428,458,488,518,548,578]
+
+
+const arraycasa1 = [
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,9,0,0,9,9,9,0,0,0,0,0,0,0,0,0,
+0,0,0,0,9,9,0,0,0,0,9,0,0,0,0,0,0,0,0,0,
+0,0,0,0,9,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,
+0,0,0,0,9,0,0,0,0,0,9,0,0,0,0,0,0,0,0,0,
+0,0,0,0,9,0,0,1,0,9,9,0,0,0,0,0,0,0,0,0,
+0,0,0,0,9,9,9,0,9,9,9,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,9,9,9,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+];
+
+
+const arraycasa2 =[
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,
+0,0,0,0,0,0,0,0,0,9,9,9,9,9,9,9,9,0,0,0,
+0,0,0,0,9,9,9,9,9,9,0,0,0,0,0,0,9,0,0,0,
+0,0,0,0,9,0,0,0,0,0,0,9,9,9,9,9,9,0,0,0,
+0,0,0,0,9,9,9,9,9,9,0,0,0,0,0,0,9,0,0,0,
+0,0,0,0,9,9,9,9,9,9,0,0,9,9,9,0,9,0,0,0,
+0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,9,0,0,0,
+0,0,0,0,9,9,9,0,9,9,9,9,9,9,9,9,9,0,0,0,
+0,0,0,0,0,0,9,9,9,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+];
+
+const arrayvilage1 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,0,9,0,0,
+                    0,0,0,0,0,0,0,0,0,0,0,0,0,9,9,9,0,9,0,0,
+                    0,0,0,1,0,0,0,0,0,0,0,0,0,9,9,9,0,0,9,0,
+                    0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,9,0,0,9,0,
+                    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,9,0,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,
+                    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                    0,0,9,9,9,9,9,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                    9,9,9,0,0,0,0,9,0,0,0,0,0,0,0,0,0,0,0,9,
+                    0,0,0,0,0,0,0,9,9,0,0,0,0,0,0,0,0,0,9,9,
+                    0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,0,9,9,9,0,
+                    0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,9,9,0,0,0,
+                    0,0,0,0,0,0,0,0,9,0,0,0,0,0,0,9,0,0,0,0,
+                    0,0,0,0,0,0,0,0,9,0,0,0,0,0,9,9,0,0,0,0];
+
+let arraymap = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+let arrayatualmap = [];
+
+arrayatualmap =[... arrayvilage1];
+let atualmap = arrayvilage1
+let localatual = arrayatualmap.indexOf(1);
+
+
+    function getDivCoordinates(elem,local) {
+
+        //localatual = arraymap.indexOf(1);
+  const rect = elem.getBoundingClientRect();
+  console.log('O local atual é' + local)
+  console.log(`As coordenadas da div são: left=${rect.left}, top=${rect.top}`);
+  arraymap[local] = 9;
+}
+function additens(){
+    addItem("Armadura5", 1,"armadura","Armadura de ouro +3");
+    addItem("Armadura20", 1,"armadura","Armadura de ouro +3");
+    addItem("Armadura24", 1,"armadura","Armadura de ouro +3");
+    addItem("Armadura31", 1,"armadura","Armadura de ouro +3");
+  addItem("diamondSword", 1,"arma","Espada de diamante +2");
+  addItem("Helmet11", 1,"elmo","Elmo de ouro +3");
+  addItem("Helmet12", 1,"elmo","Elmo de ouro +3");
+  addItem("Helmet18", 1,"elmo","Elmo de ouro +3");
+  addItem("Helmet24", 1,"elmo","Elmo de ouro +3");
+  addItem("wShield", 1,"Offhand","Escudo de Madeira +1");
+}
+
+let inventAberto = false;
+function inventario(){
+
+    inventAberto = true
+    document.querySelector('.inventory').style.visibility = 'visible';
+
+}
+
+
+
+function voltar(){
+    inventAberto = false;
+    document.querySelector('.inventory').style.visibility = 'hidden';
+    
+  if (!document.getElementById("103").getElementsByClassName("item")[0]) {
+    numImagemhelmo = 0
+    atualizarelmo();
+
+  } else {
+
+
+    if (document.getElementById("103").getElementsByClassName("item")[0].getAttribute("id").includes('Helmet')) 
+    {
+    numImagemhelmo = parseInt(document.getElementById("103").getElementsByClassName("item")[0].getAttribute("id").match(/\d+/)[0]);
+    atualizarelmo();
+    }
+
+    if (document.getElementById("112").getElementsByClassName("item")[0].getAttribute("id").includes('Armadura')) 
+    {
+    numImagemarmadura = parseInt(document.getElementById("112").getElementsByClassName("item")[0].getAttribute("id").match(/\d+/)[0]);
+    atualizararmadura();
+    }
+
+
+//     let nomeelmo = document.getElementById("103").getElementsByClassName("item")[0].getAttribute("id");
+    
+// if(nomeelmo === 'Helmet18') {
+//     numImagemhelmo = 18
+//     atualizarelmo();
+//   }
+  
+  }
+}
+
+// ──────────────────────────────────────────────────────
+// ─██████──────────██████─██████████████─██████──██████─
+// ─██░░██████████████░░██─██░░░░░░░░░░██─██░░██──██░░██─
+// ─██░░░░░░░░░░░░░░░░░░██─██░░██████░░██─██░░██──██░░██─
+// ─██░░██████░░██████░░██─██░░██──██░░██─██░░██──██░░██─
+// ─██░░██──██░░██──██░░██─██░░██──██░░██─██░░██──██░░██─
+// ─██░░██──██░░██──██░░██─██░░██──██░░██─██░░██──██░░██─
+// ─██░░██──██████──██░░██─██░░██──██░░██─██░░██──██░░██─
+// ─██░░██──────────██░░██─██░░██──██░░██─██░░░░██░░░░██─
+// ─██░░██──────────██░░██─██░░██████░░██─████░░░░░░████─
+// ─██░░██──────────██░░██─██░░░░░░░░░░██───████░░████───
+// ─██████──────────██████─██████████████─────██████─────
+// ──────────────────────────────────────────────────────
+
+
+document.addEventListener("keydown", function(event) {
+
+if(event.code === "Space"){
+    document.querySelector('#attackfrente').style.visibility = 'visible';
+setTimeout(function() {
+    document.querySelector('#attackfrente').style.visibility = 'hidden';
+}, 500); 
+}
+
+    for (let i = 0; i < 399; i++) {
+        if (arrayatualmap[i] === 1) {
+    
+  if (event.code === "KeyD" && arrayatualmap[i+1]!=9 && inventAberto == false) {
+    arrayatualmap[i] = 0
+    arrayatualmap[i + 1] = 1
+   // imgplayer1.classList.remove('invertida');
+    animardireita();
+    return movePlayer1();
+  }
+  if (event.code === "KeyA" && arrayatualmap[i-1]!=9 && inventAberto == false) {
+
+    arrayatualmap[i] = 0
+    arrayatualmap[i - 1] = 1
+           // document.getElementById('imgplayer1').classList.add('invertida');
+           animaresquerda();
+            return movePlayer1();
+
+  }
+  if (event.code === "KeyW" && arrayatualmap[i-20]!=9 && inventAberto == false) {
+
+    arrayatualmap[i] = 0
+    arrayatualmap[i - 20] = 1
+    animarcima();
+            return movePlayer1();
+
+  }
+  if (event.code === "KeyS" && arrayatualmap[i+20]!=9 && inventAberto == false) {
+
+    arrayatualmap[i] = 0
+    arrayatualmap[i + 20] = 1
+    animarbaixo();
+            return movePlayer1();
+
+  }
+
+}
+    }
+
+});
+
+
+
+
+
+
+function movePlayer1() {
+
+    for (let i = 0; i < arrayatualmap.length; i++) {
+        if (arrayatualmap[i] === 1) {
+            let x = cordenadasLeft[i];
+            let y = cordenadasTop[i];
+            player1.style.left = `${x}px`;
+            player1.style.top = `${y}px`;
+            localatual = arrayatualmap.indexOf(1);
+        }
+    }
+    verificarEvento();
+}
+
+function trasicao(){
+    document.querySelector('#transicaogif').style.visibility = 'visible';
+setTimeout(function() {
+    document.querySelector('#transicaogif').style.visibility = 'hidden';
+}, 900); 
+
+}
+
+function verificarEvento() {
+
+    
+    
+   if(atualmap == arrayvilage1 && localatual == 94){
+    trasicao();
+    arrayatualmap =[... arraycasa1];
+    atualmap = arraycasa1
+    document.querySelector('.container').style.backgroundImage = 'url("maps/mapcasa1interior.png")';
+    for (let i = 0; i < arrayatualmap.length; i++) {
+        if (arrayatualmap[i] === 1) {
+            arrayatualmap[i] = 0
+            arrayatualmap[247] = 1
+        }
+
+    }
+    movePlayer1();
+   }
+
+
+   if(atualmap == arraycasa1 && localatual == 267){
+    trasicao();
+    arrayatualmap =[... arrayvilage1];
+    atualmap = arrayvilage1
+    document.querySelector('.container').style.backgroundImage = 'url("maps/mapteste600.png")';
+    for (let i = 0; i < arrayatualmap.length; i++) {
+        if (arrayatualmap[i] === 1) {
+            arrayatualmap[i] = 0
+            arrayatualmap[114] = 1
+        }
+
+    }
+    movePlayer1();
+   }
+
+   //--------------------------
+   if(atualmap == arrayvilage1 && localatual == 224){
+    trasicao();
+    arrayatualmap =[... arraycasa2];
+    atualmap = arraycasa2
+    document.querySelector('.container').style.backgroundImage = 'url("maps/mapcasa2interior.png")';
+    // for (let i = 0; i < arrayatualmap.length; i++) {
+        // if (arrayatualmap[i] === 1) {
+            arrayatualmap[224] = 0
+            arrayatualmap[247] = 1
+        // }
+
+    // }
+    movePlayer1();
+   }
+   if(atualmap == arraycasa2 && localatual == 267){
+    trasicao();
+    arrayatualmap =[... arrayvilage1];
+    atualmap = arrayvilage1
+    document.querySelector('.container').style.backgroundImage = 'url("maps/mapteste600.png")';
+    for (let i = 0; i < arrayatualmap.length; i++) {
+        if (arrayatualmap[i] === 1) {
+            arrayatualmap[i] = 0
+            arrayatualmap[244] = 1
+        }
+
+    }
+    movePlayer1();
+   }
+
+
+   else{
+    faznada();
+   }
+
+}
+function faznada(){
+
+}
+
+let contadorbaixo = 1;
+function animarbaixo(){
+    
+    
+    if (contadorbaixo == 1){
+        imgplayer1.style.backgroundPosition = `145px 0px`;
+        armaduraplayer1.style.backgroundPosition = `145px 0px`;
+        helmoplayer1.style.backgroundPosition = `145px 0px`;
+    }
+    if (contadorbaixo == 2){
+        imgplayer1.style.backgroundPosition = `95px 0px`;
+        armaduraplayer1.style.backgroundPosition = `95px 0px`;
+        helmoplayer1.style.backgroundPosition = `95px 0px`;
+    }
+    if (contadorbaixo == 3){
+        imgplayer1.style.backgroundPosition = `50px 0px`;
+        armaduraplayer1.style.backgroundPosition = `50px 0px`;
+        helmoplayer1.style.backgroundPosition = `50px 0px`;
+    }
+    if (contadorbaixo == 4){
+        imgplayer1.style.backgroundPosition = `95px 0px`;
+        armaduraplayer1.style.backgroundPosition = `95px 0px`;
+        helmoplayer1.style.backgroundPosition = `95px 0px`;
+    }
+    if(contadorbaixo >= 4){
+        contadorbaixo = 0;
+    }
+    //imgplayer1.style.backgroundPosition = `-48px -3px`;
+    contadorbaixo++;
+}
+
+
+let contadordireita = 1;
+function animardireita(){
+    
+    
+    if (contadordireita == 1){
+        imgplayer1.style.backgroundPosition = `145px -48px`;
+        armaduraplayer1.style.backgroundPosition = `145px -48px`;
+        helmoplayer1.style.backgroundPosition = `145px -48px`;
+    }
+    if (contadordireita == 2){
+        imgplayer1.style.backgroundPosition = `95px -48px`;
+        armaduraplayer1.style.backgroundPosition = `95px -48px`;
+        helmoplayer1.style.backgroundPosition = `95px -48px`;
+    }
+    if (contadordireita == 3){
+        imgplayer1.style.backgroundPosition = `50px -48px`;
+        armaduraplayer1.style.backgroundPosition = `50px -48px`;
+        helmoplayer1.style.backgroundPosition = `50px -48px`;
+    }
+    if (contadordireita == 4){
+        imgplayer1.style.backgroundPosition = `95px -48px`;
+        armaduraplayer1.style.backgroundPosition = `95px -48px`;
+        helmoplayer1.style.backgroundPosition = `95px -48px`;
+    }
+    if(contadordireita >= 4){
+        contadordireita = 0;
+    }
+    //imgplayer1.style.backgroundPosition = `-48px -3px`;
+    contadordireita++;
+}
+let contadoresquerda = 1;
+function animaresquerda(){
+    
+    
+    if (contadoresquerda == 1){
+        imgplayer1.style.backgroundPosition = `145px -96px`;
+        armaduraplayer1.style.backgroundPosition = `145px -96px`;
+        helmoplayer1.style.backgroundPosition = `145px -96px`;
+    }
+    if (contadoresquerda == 2){
+        imgplayer1.style.backgroundPosition = `95px -96px`;
+        armaduraplayer1.style.backgroundPosition = `95px -96px`;
+        helmoplayer1.style.backgroundPosition = `95px -96px`;
+    }
+    if (contadoresquerda == 3){
+        imgplayer1.style.backgroundPosition = `50px -96px`;
+        armaduraplayer1.style.backgroundPosition = `50px -96px`;
+        helmoplayer1.style.backgroundPosition = `50px -96px`;
+    }
+    if (contadoresquerda == 4){
+        imgplayer1.style.backgroundPosition = `95px -96px`;
+        armaduraplayer1.style.backgroundPosition = `95px -96px`;
+        helmoplayer1.style.backgroundPosition = `95px -96px`;
+    }
+    if(contadoresquerda >= 4){
+        contadoresquerda = 0;
+    }
+
+    contadoresquerda++;
+}
+let contadorcima = 1;
+function animarcima(){
+    
+    
+if (contadorcima == 1){
+    imgplayer1.style.backgroundPosition = `145px 47px`;
+    armaduraplayer1.style.backgroundPosition = `145px 47px`;
+    helmoplayer1.style.backgroundPosition = `145px 47px`;
+}
+if (contadorcima == 2){
+    imgplayer1.style.backgroundPosition = `95px 47px`;
+    armaduraplayer1.style.backgroundPosition = `95px 47px`;
+    helmoplayer1.style.backgroundPosition = `95px 47px`;
+}
+if (contadorcima == 3){
+    imgplayer1.style.backgroundPosition = `50px 47px`;
+    armaduraplayer1.style.backgroundPosition = `50px 47px`;
+    helmoplayer1.style.backgroundPosition = `50px 47px`;
+}
+if (contadorcima == 4){
+    imgplayer1.style.backgroundPosition = `95px 47px`;
+    armaduraplayer1.style.backgroundPosition = `95px 47px`;
+    helmoplayer1.style.backgroundPosition = `95px 47px`;
+}
+    if(contadorcima >= 4){
+        contadorcima = 0;
+    }
+    //imgplayer1.style.backgroundPosition = `-48px -3px`;
+    contadorcima++;
+}
+
+</script>
+</html>
